@@ -11,12 +11,15 @@ tasks.add("19-function-composition", {
 
       var rev = function(s){ return s.split("").reverse().join(""); };
       var doub = function(s){ return s+s; };
+      var inc = function(x){ return x+1; };
 
       strictEqual(typeof compose(rev, rev), 'function', 'compose returns a function');
 
-      strictEqual(compose(doub, rev)('abc'), 'cbacba', 'correct value for x+x, reverse(x)');
-      strictEqual(compose(rev, rev)('wut'), 'wut', 'correct value for reverse(x), reverse(x)');
       strictEqual(compose(rev, rev)(2), 8, 'correct value for 2*x, 2*x');
+      strictEqual(compose(rev, rev)('wut'), 'wut', 'correct value for reverse(x), reverse(x)');
+      strictEqual(compose(doub, rev)('abc'), 'cbacba', 'correct value for x+x, reverse(x)');
+      strictEqual(compose(inc, doub)(4), 9, 'correct value for x+1, 2*x');
+      strictEqual(compose(doub, inc)(4), 10, 'correct value for 2*x, x+1');
     });
   }
 });
